@@ -1,0 +1,15 @@
+Package: pronouncingR
+Type: Package
+Title: What the package does (short line)
+Version: 1.0
+Date: 2020-02-25
+Author: Who wrote it
+Maintainer: Who to complain to <brad.buchsbaum@gmail.com>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+Suggests: 
+    testthat
+Imports: 
+    dplyr,
+    reticulate
+RoxygenNote: 6.1.1
