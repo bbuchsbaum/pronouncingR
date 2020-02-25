@@ -1,15 +1,16 @@
 Package: pronouncingR
 Type: Package
-Title: What the package does (short line)
+Title: interface to python pronouncing library
 Version: 1.0
 Date: 2020-02-25
-Author: Who wrote it
+Author: Bradley R. Buchsbaum
 Maintainer: Who to complain to <brad.buchsbaum@gmail.com>
-Description: More about what it does (maybe more than one line)
+Description: functions for converting words to ARPABET codes and feature vectors
 License: What license is it under?
 Suggests: 
     testthat
-Imports: 
-    dplyr,
+Depends:
     reticulate
+Imports: 
+    dplyr
 RoxygenNote: 6.1.1
