@@ -17,7 +17,7 @@ all_features <- list()
 entries <- list()
 
 normalize <- function(x) x/sqrt(sum(x^2))
-env <- new.env()
+
 H <- NULL
 for (i in 1:length(linesplit)) {    
   if (i %% 5000 == 0) {
@@ -48,7 +48,21 @@ fmat <- lapply(entries, function(ent) {
 
 fmat <- do.call(rbind, fmat)
 pcres <- prcomp(fmat, center=TRUE, scale=FALSE)
-xPCAwhite = diag(1./sqrt(diag(S) + epsilon)) * U' * x;
+
+projection <- pcres$rotation %*% diag(1/(pcres$sdev + epsilon)) 
+
+out <- list(
+  centroid=colMeans(fmat),
+  words = tolower(names(entries)),
+  projmat = pcres$rotation[,1:100],
+  whprojmat = projection[,1:100],
+  sdev = pcres$sdev,
+  components=pcres$x,
+  whcomponents=apply(pcres$x[,1:100],2,normalize)
+)
+  
+  
+
 
 pcres2 <- sk$PCA(n_components=as.integer(50), whiten=TRUE)  
 transformed = pcres2$fit_transform(fmat)
