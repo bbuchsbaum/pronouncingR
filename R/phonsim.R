@@ -48,10 +48,12 @@ phone_feature_map = list(
 # [('vls', 'alv', 'stp', 'frc'), ('hgh', 'fnt', 'unr', 'vwl'), ('vcd', 'alv', 'frc')]
 
 phone_to_features <- function(ph) {
-  if (substr(ph, nchar(ph), nchar(ph)) %in% c(0,1,2)) {
-    ph <- substr(ph, 1, nchar(ph)-1)
-  }
-  phone_feature_map[ph]
+  lapply(ph, function(x) {
+    if (substr(x, nchar(x), nchar(x)) %in% c(0,1,2)) {
+      x <- substr(x, 1, nchar(x)-1)
+    }
+    phone_feature_map[x]
+  })
 }
 
 #Takes a list of ARPAbet phones and returns a list of features.
@@ -69,7 +71,7 @@ feature_bigrams <- function(phones_list, include_reverse=TRUE) {
     #g <- expand.grid(unlist(f1),unlist(f0))
     #paste(g[,2], g[,1], sep="-")
     gg <- do.call(rbind, sapply(1:length(f1), function(i) {
-      expand.grid(f0[[i]], f1[[i]])
+      expand.grid(f0[[i]][[1]], f1[[i]][[1]])
     }, simplify=FALSE))
     paste(gg[,1], gg[,2], sep="-")
     
